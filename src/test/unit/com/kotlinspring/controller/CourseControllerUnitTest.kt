@@ -30,7 +30,12 @@ class CourseControllerUnitTest {
 
     @Test
     fun addCourse_validation() {
-        val courseDto = CourseDto(null, "", "")
+        val courseDto = CourseDto(
+            id = null,
+            name = "",
+            category = "",
+            instructorId = 1
+        )
 
         every { courseServiceMock.addCourse(courseDto = courseDto) } returns courseDTO(id = 1)
 
@@ -48,7 +53,12 @@ class CourseControllerUnitTest {
 
     @Test
     fun addCourse_runtimeException() {
-        val courseDto = CourseDto(null, "Build Restful APIs using Kotlin and SpringBoot", "Development")
+        val courseDto = CourseDto(
+            id = null,
+            name = "Build Restful APIs using Kotlin and SpringBoot",
+            category = "Development",
+            instructorId = 1
+        )
 
         val errorMessage = "Unexpected Error occurred."
         every { courseServiceMock.addCourse(courseDto = courseDto) } throws RuntimeException(errorMessage)
@@ -67,7 +77,12 @@ class CourseControllerUnitTest {
 
     @Test
     fun addCourse() {
-        val courseDto = CourseDto(null, "Build Restful APIs using Kotlin and SpringBoot", "Development")
+        val courseDto = CourseDto(
+            id = null,
+            name = "Build Restful APIs using Kotlin and SpringBoot",
+            category = "Development",
+            instructorId = 1
+        )
 
         every { courseServiceMock.addCourse(courseDto = courseDto) } returns courseDTO(id = 1)
 
@@ -106,10 +121,17 @@ class CourseControllerUnitTest {
 
     @Test
     fun updateCourse() {
-        val courseDto = CourseDto(1, "Build RestFul APis using SpringBoot and Kotlin", "Development")
+        val courseDto = CourseDto(
+            id = 1,
+            name = "Build RestFul APis using SpringBoot and Kotlin",
+            category = "Development",
+            instructorId = 1
+        )
         val updatedCourseDto = CourseDto(
-            1,
-            "Build RestFul APis using SpringBoot and Kotlin1", "Development2"
+            id = 1,
+            name = "Build RestFul APis using SpringBoot and Kotlin1",
+            category = "Development2",
+            instructorId = 1
         )
         every {
             courseServiceMock.updateCourse(
@@ -132,19 +154,22 @@ class CourseControllerUnitTest {
         Assertions.assertEquals("Development2", updatedCourse?.category)
     }
 
-     @Test
-     fun deleteCourse(){
-         val courseDtoForDelete = CourseDto(1,
-             "Build RestFul APis using SpringBoot and Kotlin", "Development")
-         every{
-             courseServiceMock.deleteCourse(courseId = courseDtoForDelete.id!!)
-         } just runs // returns nothing just run it.
+    @Test
+    fun deleteCourse() {
+        val courseDtoForDelete = CourseDto(
+            id = 1,
+            name = "Build RestFul APis using SpringBoot and Kotlin",
+            category = "Development"
+        )
+        every {
+            courseServiceMock.deleteCourse(courseId = courseDtoForDelete.id!!)
+        } just runs // returns nothing just run it.
 
 
-         webTestClient
-             .post()
-             .uri("/v1/courses/{courseId}/delete", courseDtoForDelete.id)
-             .exchange()
-             .expectStatus().isNoContent
-     }
+        webTestClient
+            .post()
+            .uri("/v1/courses/{courseId}/delete", courseDtoForDelete.id)
+            .exchange()
+            .expectStatus().isNoContent
+    }
 }
