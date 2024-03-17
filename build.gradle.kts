@@ -25,8 +25,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    runtimeOnly("com.h2database:h2")
-    //runtimeOnly("org.postgresql:postgresql")
+    //runtimeOnly("com.h2database:h2")
+    runtimeOnly("org.postgresql:postgresql")
 
     // logging
     val kotlinLoggingJvmVersion = "5.1.0"
