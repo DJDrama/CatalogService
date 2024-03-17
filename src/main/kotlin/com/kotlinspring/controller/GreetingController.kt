@@ -1,7 +1,7 @@
-package kotlinspring.controller
+package com.kotlinspring.controller
 
 import io.github.oshai.kotlinlogging.*
-import kotlinspring.service.GreetingService
+import com.kotlinspring.service.GreetingService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping

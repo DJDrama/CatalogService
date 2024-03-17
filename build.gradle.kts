@@ -33,6 +33,10 @@ dependencies {
     implementation("io.github.oshai:kotlin-logging-jvm:$kotlinLoggingJvmVersion")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-webflux")
+
+    testImplementation("io.mockk:mockk:1.13.10")
+    testImplementation("com.ninja-squad:springmockk:4.0.2")
 }
 
 tasks.withType<KotlinCompile> {
@@ -44,4 +48,12 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+sourceSets {
+    test {
+        java {
+            kotlin.setSrcDirs(listOf("src/test/intg", "src/test/unit"))
+        }
+    }
 }
