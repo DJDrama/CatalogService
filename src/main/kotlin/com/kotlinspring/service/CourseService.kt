@@ -23,8 +23,10 @@ class CourseService(
         return savedCourse.asDtoModel()
     }
 
-    fun retrieveAllCourses(): List<CourseDto> {
-        val courses = courseRepository.findAll()
+    fun retrieveAllCourses(courseName: String? = null): List<CourseDto> {
+        val courses = courseName?.let {
+            courseRepository.findByNameContaining(courseName = courseName)
+        } ?: courseRepository.findAll()
         return courses.map {
             it.asDtoModel()
         }

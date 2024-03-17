@@ -15,8 +15,8 @@ class CourseController(
 ) {
 
     @GetMapping
-    fun retrieveAllCourses(): List<CourseDto> {
-        return courseService.retrieveAllCourses()
+    fun retrieveAllCourses(@RequestParam("courseName", required = false) courseName: String?): List<CourseDto> {
+        return courseService.retrieveAllCourses(courseName = courseName)
     }
 
     @PostMapping
@@ -32,7 +32,7 @@ class CourseController(
 
     @PostMapping("/{courseId}/delete")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteCourse(@PathVariable("courseId") courseId: Int){
+    fun deleteCourse(@PathVariable("courseId") courseId: Int) {
         return courseService.deleteCourse(courseId)
     }
 
