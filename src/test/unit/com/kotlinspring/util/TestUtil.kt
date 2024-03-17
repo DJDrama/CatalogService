@@ -1,5 +1,6 @@
 package com.kotlinspring.util
 
+import com.kotlinspring.dto.CourseDto
 import com.kotlinspring.entity.Course
 
 
@@ -14,19 +15,22 @@ fun courseEntityList() = listOf(
         "Wiremock for Java Developers", "Development" ,
     )
 )
-/*
 
 fun courseDTO(
     id: Int? = null,
     name: String = "Build RestFul APis using Spring Boot and Kotlin",
     category: String = "Development",
-    instructorId: Int? = 1
+    //instructorId: Int? = 1
 ) = CourseDto(
     id,
     name,
     category,
-    instructorId
+   // instructorId
 )
+
+/*
+
+
 
 fun courseEntityList(instructor: Instructor? = null) = listOf(
     Course(null,
