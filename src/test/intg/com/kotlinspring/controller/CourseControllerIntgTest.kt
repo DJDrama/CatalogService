@@ -2,7 +2,6 @@ package com.kotlinspring.controller
 
 import com.kotlinspring.dto.CourseDto
 import com.kotlinspring.entity.Course
-import com.kotlinspring.entity.asDtoList
 import com.kotlinspring.repository.CourseRepository
 import com.kotlinspring.util.courseEntityList
 import org.junit.jupiter.api.Assertions
@@ -26,14 +25,14 @@ class CourseControllerIntgTest {
     lateinit var courseRepository: CourseRepository
 
     @BeforeEach
-    fun setup(){
+    fun setup() {
         courseRepository.deleteAll()
         val courses = courseEntityList()
         courseRepository.saveAll(courses)
     }
 
     @Test
-    fun addCourse(){
+    fun addCourse() {
         val courseDto = CourseDto(null, "Build Restful APIs using Kotlin and SpringBoot", "Development")
 
         val savedCourseDto = webTestClient
@@ -52,7 +51,7 @@ class CourseControllerIntgTest {
     }
 
     @Test
-    fun retrieveAllCourses(){
+    fun retrieveAllCourses() {
         val courseDtos = webTestClient
             .get()
             .uri("/v1/courses")
@@ -68,14 +67,20 @@ class CourseControllerIntgTest {
     }
 
     @Test
-    fun updateCourse(){
+    fun updateCourse() {
         // exsiting course
-        val course = courseRepository.save( Course(null,
-            "Build RestFul APis using SpringBoot and Kotlin", "Development"))
+        val course = courseRepository.save(
+            Course(
+                null,
+                "Build RestFul APis using SpringBoot and Kotlin", "Development"
+            )
+        )
 
         // updated CourseDto
-        val updatedCourseDto = CourseDto(null,
-            "Build RestFul APis using SpringBoot and Kotlin1", "Development2")
+        val updatedCourseDto = CourseDto(
+            null,
+            "Build RestFul APis using SpringBoot and Kotlin1", "Development2"
+        )
 
         val updatedCourse = webTestClient
             .put()
@@ -92,10 +97,14 @@ class CourseControllerIntgTest {
     }
 
     @Test
-    fun deleteCourse(){
+    fun deleteCourse() {
         // exsiting course
-        val course = courseRepository.save( Course(null,
-            "Build RestFul APis using SpringBoot and Kotlin", "Development"))
+        val course = courseRepository.save(
+            Course(
+                null,
+                "Build RestFul APis using SpringBoot and Kotlin", "Development"
+            )
+        )
 
 
         val deletedCourse = webTestClient
